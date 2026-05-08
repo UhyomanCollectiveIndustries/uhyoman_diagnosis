@@ -85,6 +85,14 @@ const questions: Question[] = [
     ],
   },
   {
+    text: "お酒を飲むときのうひょは？",
+    choices: [
+      { label: "うひょ～！と楽しく飲む", value: "A" },
+      { label: "うっひょ～！とテンション爆上げで飲む", value: "B" },
+      { label: "うひょ～ん…としんみり飲む", value: "C" },
+    ],
+  },
+  {
     text: "自分のうひょレベルを自己評価すると？",
     choices: [
       { label: "標準的なうひょ", value: "A" },
