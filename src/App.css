@@ -1,0 +1,337 @@
+﻿/* ウヒョマン診断 - かわいいスタイル */
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  margin: 0;
+  font-family: "Hiragino Maru Gothic Pro", "Rounded Mplus 1c", "M PLUS Rounded 1c", system-ui, sans-serif;
+}
+
+.uhyo-app {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, #ffd6e7 0%, #ffecd2 40%, #d4f1f9 100%);
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景デコレーション */
+.uhyo-app::before,
+.uhyo-app::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  opacity: 0.35;
+  pointer-events: none;
+}
+.uhyo-app::before {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #f9a8d4, transparent 70%);
+  top: -80px; left: -80px;
+}
+.uhyo-app::after {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, #93c5fd, transparent 70%);
+  bottom: -60px; right: -60px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border: 2.5px solid rgba(255, 255, 255, 0.9);
+  border-radius: 32px;
+  padding: 48px 40px;
+  width: 100%;
+  max-width: 520px;
+  box-shadow:
+    0 8px 32px rgba(236, 72, 153, 0.12),
+    0 2px 8px rgba(0,0,0,0.06);
+  text-align: center;
+  animation: fadeSlideIn 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===== スタート画面 ===== */
+.uhyo-logo-box {
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 0 auto 16px;
+  display: block;
+  box-shadow: 0 4px 20px rgba(244, 114, 182, 0.45);
+  animation: float 2.8s ease-in-out infinite;
+  text-align: center;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%       { transform: translateY(-12px) rotate(3deg); }
+}
+
+.start-card h1 {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 4px 0 14px;
+  background: linear-gradient(135deg, #f472b6 0%, #fb923c 60%, #facc15 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.04em;
+}
+
+.subtitle {
+  font-size: 0.98rem;
+  color: #9d7bb5;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+/* ===== ボタン ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 44px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #f472b6 0%, #fb923c 100%);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.18s, box-shadow 0.18s;
+  box-shadow: 0 4px 18px rgba(244, 114, 182, 0.45), 0 2px 0 rgba(0,0,0,0.05);
+  letter-spacing: 0.05em;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(244, 114, 182, 0.55);
+}
+
+.btn-primary:active { transform: scale(0.96); }
+
+/* ===== プログレスバー ===== */
+.progress-wrap {
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #fce7f3;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f9a8d4, #fb923c);
+  border-radius: 99px;
+  transition: width 0.4s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.question-count {
+  font-size: 0.8rem;
+  color: #c084fc;
+  margin-top: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* ===== クイズ ===== */
+.question-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  line-height: 1.55;
+  margin-bottom: 28px;
+  color: #4a2060;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.btn-choice {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: #fdf4ff;
+  border: 2.5px solid #e9d5ff;
+  border-radius: 18px;
+  color: #5b21b6;
+  font-size: 0.98rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s, border-color 0.15s, transform 0.18s, box-shadow 0.18s;
+  font-family: inherit;
+}
+
+.btn-choice:hover {
+  background: #fce7f3;
+  border-color: #f9a8d4;
+  transform: translateX(6px) scale(1.01);
+  box-shadow: 0 4px 14px rgba(244, 114, 182, 0.2);
+}
+
+.btn-choice:active { transform: scale(0.97); }
+
+.choice-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f472b6, #fb923c);
+  font-weight: 900;
+  font-size: 0.88rem;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(244, 114, 182, 0.4);
+}
+
+/* ===== 結果画面 ===== */
+.result-card .result-lead {
+  font-size: 1rem;
+  color: #c084fc;
+  margin-bottom: 16px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.result-type {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 14px;
+  background: linear-gradient(135deg, #f472b6, #fb923c, #facc15);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.result-desc {
+  font-size: 0.98rem;
+  color: #7c3aed;
+  line-height: 1.85;
+  margin-bottom: 34px;
+  background: #fdf4ff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  border: 1.5px solid #e9d5ff;
+}
+
+/* ハート飾り -> 削除済 */
+
+@media (max-width: 480px) {
+  .card { padding: 36px 20px; }
+  .start-card h1 { font-size: 1.75rem; }
+  .question-text { font-size: 1.1rem; }
+  .result-type { font-size: 1.6rem; }
+}
+
+/* ===== Kawaii アイスクリームキャラクター ===== */
+.kawaii-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 110px;
+  overflow: visible;
+  margin-bottom: 12px;
+}
+
+.kawaii {
+  position: relative;
+  height: 170px;
+  width: 120px;
+  animation: kawaii-jump 2s infinite;
+}
+
+.kawaii__face::before,
+.kawaii__face::after,
+.kawaii--foot::after {
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+.kawaii--foot::after {
+  --foot-w: calc(100% - 70%);
+  --foot-h: calc(100% - 70%);
+  height: var(--foot-h);
+  width: var(--foot-w);
+  border-radius: 0 0 calc(100% - 85%) calc(100% - 85%);
+  background: #ffd2b1;
+  background: linear-gradient(195deg, #f5c09a 17%, #ffd2b1 18%);
+  bottom: calc(-1 * var(--foot-h));
+  left: calc(50% - var(--foot-w) / 2);
+}
+
+.kawaii__face {
+  height: 50px;
+  top: 55%;
+  left: -5px;
+  position: relative;
+}
+
+.kawaii__face::before {
+  height: 50px;
+  width: 100%;
+}
+
+/* smile */
+.kawaii__face::after {
+  --smile-w: calc(100% - 80%);
+  left: calc(50% - var(--smile-w) / 2);
+  border-radius: 50%;
+  box-shadow: 0 22px 0 0 #cc3355;
+  width: var(--smile-w);
+  height: calc(100% - 40%);
+}
+
+/* eyes */
+.kawaii__face.kawaii__face--eyes-normal::before {
+  background-image:
+    radial-gradient(#654d3e 25%, transparent 0),
+    radial-gradient(#654d3e 25%, transparent 0);
+  background-size: 50px 50px;
+  background-position: 13%;
+}
+
+.kawaii--pink {
+  background-color: #f38cb7;
+  box-shadow: inset -10px -5px 0px 0px #e07aaa;
+}
+
+.kawaii__ice-cream {
+  border-radius: 20px;
+  border-top-right-radius: 45%;
+  border-top-left-radius: 45%;
+}
+
+@keyframes kawaii-jump {
+  0%, 20%  { transform: translateY(-30px); height: 200px; }
+  40%, 70% { transform: translateY(0);     height: 150px; }
+  60%      { transform: translateY(-70px); height: 220px; }
+  80%      { transform: translateY(8px);   height: 150px; }
+  100%     { transform: translateY(-30px); height: 200px; }
+}
+
